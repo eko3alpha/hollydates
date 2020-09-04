@@ -82,9 +82,9 @@
             }
         }
 
-        var addByOccurance = function(holiday, occurance, weekDay, month)
+        var addByOccurrence = function(holiday, occurrence, weekDay, month)
         {
-            HOLIDAYS[holiday] = [occurance, weekDay, month];
+            HOLIDAYS[holiday] = [occurrence, weekDay, month];
             return {'onMatch' : onMatch(holiday)};
         }
 
@@ -112,7 +112,7 @@
             return true;
         }
 
-        var isDay = function(date, occurance, weekDay, month) {
+        var isDay = function(date, occurrence, weekDay, month) {
 
             if (date.getMonth() != month - 1) {
                 return false;
@@ -122,11 +122,11 @@
                 return false;
             }
 
-            if (occurance == Math.ceil(date.getDate() / DAYS_IN_WEEK)) {
+            if (occurrence == Math.ceil(date.getDate() / DAYS_IN_WEEK)) {
                 return true;
             }
 
-            if (occurance != LAST) {
+            if (occurrence != LAST) {
                 return false;
             }
 
@@ -136,11 +136,11 @@
 
         var getRegisteredOccurrence = function(date) {
             var results = Object.keys(HOLIDAYS).filter(function(val, index) {
-                var occurance = HOLIDAYS[val][0];
+                var occurrence = HOLIDAYS[val][0];
                 var weekDay = HOLIDAYS[val][1];
                 var month = HOLIDAYS[val][2];
 
-                if (isDay(date, occurance, weekDay, month)) {
+                if (isDay(date, occurrence, weekDay, month)) {
                     return true;
                 }
 
@@ -235,7 +235,7 @@
         return {
             'isHoliday': isHoliday,
             'isWeekend': isWeekend,
-            'addByOccurance': addByOccurance,
+            'addByOccurrence': addByOccurrence,
             'addByDate': addByDate,
             'getHoliday': getHoliday,
             'trigger': trigger,

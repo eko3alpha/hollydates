@@ -187,10 +187,10 @@ module('isDate', function () {
     });
 });
 
-module('addByOccurance', function () {
+module('addByOccurrence', function () {
     test('Last Day of School', function (assert) {
 
-        h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN);
+        h.addByOccurrence('Last Day of School', h.LAST, h.FRI, h.JUN);
 
         assert.equal(
             h._.getRegisteredOccurrence(new Date('6/26/2020')),
@@ -266,7 +266,7 @@ module('getCallBacks', function () {
         var h = HollyDates();
         h.reset();
 
-        h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN)
+        h.addByOccurrence('Last Day of School', h.LAST, h.FRI, h.JUN)
             .onMatch(function(holiday)
             {});
 
@@ -291,7 +291,7 @@ module('getHoliday', function () {
         var h = HollyDates();
         h.reset();
 
-        h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN);
+        h.addByOccurrence('Last Day of School', h.LAST, h.FRI, h.JUN);
 
         assert.equal(
             h.getHoliday(new Date('6/26/2020')),
@@ -342,7 +342,7 @@ module('getHoliday', function () {
 
 //         var test;
 
-//         h.addByOccurance('My Holiday', h.LAST, h.FRI, h.JUN)
+//         h.addByOccurrence('My Holiday', h.LAST, h.FRI, h.JUN)
 //             .onMatch(function(holiday)
 //             {
 //                 test = holiday;

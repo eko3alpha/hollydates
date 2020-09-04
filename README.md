@@ -14,8 +14,8 @@ If you don't want to check for any of the preloaded holidays you can clear the l
 
 Add custom floating holidays that occur on certain days of the month
 
-    h.addByOccurance('Memorial Day', h.LAST, h.MON, h.MAY);
-    h.addByOccurance('Labor Day', h.FIRST, h.MON, h.SEP);
+    h.addByOccurrence('Memorial Day', h.LAST, h.MON, h.MAY);
+    h.addByOccurrence('Labor Day', h.FIRST, h.MON, h.SEP);
 
 Add custom holidays that fall on the same date every year
 
@@ -23,13 +23,13 @@ Add custom holidays that fall on the same date every year
     h.addByDate('New Years', h.JAN, 1);
     h.addByDate('My Super Soft Birthday Party!', h.AUG, 16);
 
-Check to see what holiday falls on a given date
+Check to see what holiday (occurrence or custom date) falls on a given date
 
     h.getHoliday(new Date('1/1/2020'));
     // returns "New Years"
 
-    h.getHoliday(new Date('12/25/1999'));
-    // returns "Christmas"
+    h.getHoliday(new Date('9/7/2020'));
+    // returns "Labor Day"
 
     h.getHoliday(new Date('8/16/2020'));
     // returns "My Super Soft Birthday Party!"
@@ -57,31 +57,41 @@ You can also check for weekends ( Saturday or Sunday)
 These holidays are the defaults.  No need to load them unless you reset.
 
 New Year’s Day :: January 1st
+
     h.addByDate('Christmas', h.JAN, 1);
 
 Martin Luther King Day :: 3rd Monday of January
-    h.addByOccurance('Memorial Day', h.THIRD, h.MON, h.JAN);
+
+    h.addByOccurrence('Memorial Day', h.THIRD, h.MON, h.JAN);
 
 Washington’s Birthday :: February 17th
+
     h.addByDate('Christmas', h.FEB, 17);
 
 Memorial Day :: Last Monday of May
-    h.addByOccurance('Memorial Day', h.LAST, h.MON, h.MAY);
+
+    h.addByOccurrence('Memorial Day', h.LAST, h.MON, h.MAY);
 
 Independence Day :: July 4th
+
     h.addByDate('Christmas', h.JUL, 4);
 
 Labor Day :: 1st Monday of September
-    h.addByOccurance('Memorial Day', h.FIRST, h.MON, h.SEP);
+
+    h.addByOccurrence('Memorial Day', h.FIRST, h.MON, h.SEP);
 
 Columbus Day :: 2nd Monday of October
-    h.addByOccurance('Memorial Day', h.SECOND, h.MON, h.OCT);
+
+    h.addByOccurrence('Memorial Day', h.SECOND, h.MON, h.OCT);
 
 Veterans Day :: November 11th
+
     h.addByDate('Christmas', h.NOV, 11);
 
 Thanksgiving Day :: Last Thursday of November
-    h.addByOccurance('Memorial Day', h.LAST, h.THU, h.NOV);
+
+    h.addByOccurrence('Memorial Day', h.LAST, h.THU, h.NOV);
 
 Christmas Day :: December 25th
+
     h.addByDate('Christmas', h.DEC, 25);

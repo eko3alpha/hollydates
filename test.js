@@ -233,3 +233,31 @@ module('reset', function () {
         );
     });
 });
+
+module('isWeekend', function () {
+    test('check weekends', function (assert) {
+
+        assert.true(
+            h.isWeekend(new Date('9/5/2020')),
+            '9/5/2020 falls on a saturday'
+        );
+
+        assert.true(
+            h.isWeekend(new Date('9/6/2020')),
+            '9/6/2020 falls on a sunday'
+        );
+    });
+
+    test('check weekdays', function (assert) {
+
+        assert.false(
+            h.isWeekend(new Date('9/4/2020')),
+            '9/5/2020 falls on a friday'
+        );
+
+        assert.false(
+            h.isWeekend(new Date('9/7/2020')),
+            '9/6/2020 falls on a monday'
+        );
+    });
+});

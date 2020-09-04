@@ -59,25 +59,25 @@ module('isDay', function () {
     });
 });
 
-module('getHoliday', function () {
+module('getRegisteredOccurrence', function () {
     test('Martin Luther King, Jr. Day', function (assert) {
 
         var HOLIDAY = 'Martin Luther King, Jr. Day';
 
         assert.equal(
-            h.getHoliday(new Date('1/18/2021')),
+            h._.getRegisteredOccurrence(new Date('1/18/2021')),
             HOLIDAY,
             '1/18/2021'
         );
 
         assert.equal(
-            h.getHoliday(new Date('1/15/2103')),
+            h._.getRegisteredOccurrence(new Date('1/15/2103')),
             HOLIDAY,
             '1/15/2103'
         );
 
         assert.equal(
-            h.getHoliday(new Date('1/20/1986')),
+            h._.getRegisteredOccurrence(new Date('1/20/1986')),
             HOLIDAY,
             '1/20/1986'
         );
@@ -89,19 +89,19 @@ module('getHoliday', function () {
         var HOLIDAY = 'Thanksgiving Day';
 
         assert.equal(
-            h.getHoliday(new Date('11/26/2015')),
+            h._.getRegisteredOccurrence(new Date('11/26/2015')),
             HOLIDAY,
             '11/26/2015'
         );
 
         assert.equal(
-            h.getHoliday(new Date('11/30/2023')),
+            h._.getRegisteredOccurrence(new Date('11/30/2023')),
             HOLIDAY,
             '11/30/2023'
         );
 
         assert.equal(
-            h.getHoliday(new Date('11/27/2025')),
+            h._.getRegisteredOccurrence(new Date('11/27/2025')),
             HOLIDAY,
             '11/27/2025'
         );
@@ -109,13 +109,13 @@ module('getHoliday', function () {
     });
 });
 
-module('getDate', function () {
+module('getRegisteredDate', function () {
     test('custom dates', function (assert) {
 
         var HOLIDAY = 'Christmas';
 
         assert.equal(
-            h._.getDate(new Date('12/25/2021')),
+            h._.getRegisteredDate(new Date('12/25/2021')),
             HOLIDAY,
             '1/25/2021 is Christmas'
         );
@@ -123,7 +123,7 @@ module('getDate', function () {
         var HOLIDAY = "New Year's Day";
 
         assert.equal(
-            h._.getDate(new Date('1/1/2021')),
+            h._.getRegisteredDate(new Date('1/1/2021')),
             HOLIDAY,
             "1/1/2021 is New Year's Day"
         );
@@ -193,7 +193,7 @@ module('addByOccurance', function () {
         h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN);
 
         assert.equal(
-            h.getHoliday(new Date('6/26/2020')),
+            h._.getRegisteredOccurrence(new Date('6/26/2020')),
             'Last Day of School'
         );
     });
@@ -206,7 +206,7 @@ module('addByDate', function () {
         h.addByDate('My Birthday', h.AUG, 16);
 
         assert.equal(
-            h._.getDate(new Date('8/16/2020')),
+            h._.getRegisteredDate(new Date('8/16/2020')),
             'My Birthday'
         );
     });
@@ -219,7 +219,7 @@ module('reset', function () {
         h.reset();
 
         assert.deepEqual(
-            h._.getHolidays(),
+            h._.getRegisteredOccurrences(),
             {},
             'reset should clear all holidays'
         );
@@ -266,13 +266,9 @@ module('getCallBacks', function () {
         var h = HollyDates();
         h.reset();
 
-        var testMe;
-
         h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN)
             .onMatch(function(holiday)
-            {
-                testMe = 'fired';
-            });
+            {});
 
         assert.equal(
             typeof h._.getCallBacks()['Last Day of School'],
@@ -288,3 +284,77 @@ module('getCallBacks', function () {
 
     });
 });
+
+module('getHoliday', function () {
+    test('returns registered holiday', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN);
+
+        assert.equal(
+            h.getHoliday(new Date('6/26/2020')),
+            'Last Day of School',
+            'date should return "Last Day of School'
+        );
+
+        assert.equal(
+            h.getHoliday(new Date('6/27/2020')),
+            null,
+            'date should return "Last Day of School'
+        );
+
+    });
+
+    test('returns registered date', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        h.addByDate('Last Day of School', h.JUN, 1);
+
+        assert.equal(
+            h.getHoliday(new Date('6/1/2020')),
+            'Last Day of School',
+            'date should return "Last Day of School'
+        );
+
+        assert.equal(
+            h.getHoliday(new Date('6/2/2020')),
+            null,
+            'date should return "Last Day of School'
+        );
+    });
+
+});
+
+
+
+
+
+
+// module('onMatch', function () {
+//     test('test callback execution', function (assert) {
+
+//         var h = HollyDates();
+//         h.reset();
+
+//         var test;
+
+//         h.addByOccurance('My Holiday', h.LAST, h.FRI, h.JUN)
+//             .onMatch(function(holiday)
+//             {
+//                 test = holiday;
+//             });
+
+//         h.trigger(new Date('6/26/2020'));
+
+//         assert.equal(
+//             test,
+//             'My Holiday',
+//             'callback should fire'
+//         );
+
+//     });
+// });

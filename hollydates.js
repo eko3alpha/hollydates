@@ -64,8 +64,18 @@
             }
         }
 
-        var runCallBack = function(holiday)
+        var trigger = function(date)
         {
+            if(isHoliday(date))
+            {
+                return;
+            }
+
+            if(isDate(date))
+            {
+                return;
+            }
+
             if(typeof CALLBACKS[holiday] == 'function')
             {
                 CALLBACKS[holiday](holiday);
@@ -124,7 +134,7 @@
 
         }
 
-        var getHoliday = function(date) {
+        var getRegisteredOccurrence = function(date) {
             var results = Object.keys(HOLIDAYS).filter(function(val, index) {
                 var occurance = HOLIDAYS[val][0];
                 var weekDay = HOLIDAYS[val][1];
@@ -145,7 +155,7 @@
 
         }
 
-        var getDate = function(date) {
+        var getRegisteredDate = function(date) {
             var results = Object.keys(CUSTOM_DATES).filter(function(val, index) {
                 var month = CUSTOM_DATES[val][0];
                 var day = CUSTOM_DATES[val][1];
@@ -181,18 +191,33 @@
 
         var isHoliday = function(date) {
 
-            if (getHoliday(date)) {
+            if (getRegisteredOccurrence(date)) {
                 return true;
             }
 
-            if (getDate(date)) {
+            if (getRegisteredDate(date)) {
                 return true;
             }
 
             return false;
         }
 
-        var getHolidays = function()
+        var getHoliday = function(date)
+        {
+            var holiday;
+            if (( holiday = getRegisteredOccurrence(date)) != null) {
+                return holiday;
+            }
+
+            if (( holiday = getRegisteredDate(date)) != null) {
+                return holiday;
+            }
+
+            return null;
+        }
+
+
+        var getRegisteredOccurrences = function()
         {
             return HOLIDAYS;
         }
@@ -213,6 +238,7 @@
             'addByOccurance': addByOccurance,
             'addByDate': addByDate,
             'getHoliday': getHoliday,
+            'trigger': trigger,
             'reset': reset,
 
             'SUN': 1,
@@ -243,14 +269,14 @@
             'LAST': -1,
 
             '_': {
-                'getHolidays': getHolidays,
+                'getRegisteredOccurrences': getRegisteredOccurrences,
                 'getCustomDates': getCustomDates,
                 'getCallBacks': getCallBacks,
-                'getDate': getDate,
+                'getRegisteredDate': getRegisteredDate,
+                'getRegisteredOccurrence': getRegisteredOccurrence,
                 'isDay': isDay,
                 'isDate': isDate,
-                'getMonthAWeekFromDate': getMonthAWeekFromDate,
-                'runCallBack': runCallBack
+                'getMonthAWeekFromDate': getMonthAWeekFromDate
             }
         }
     }

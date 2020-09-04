@@ -240,7 +240,7 @@ Pass a callback during registration
 
     });
 
-    h.addByDate('My Fav Holiday', h.NOV, 5)
+    h.addByDate('My Second Fav Holiday', h.NOV, 5)
     .onMatch(function(holiday, date) {
 
         // do something here

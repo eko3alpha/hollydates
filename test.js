@@ -120,12 +120,12 @@ module('getDate', function () {
             '1/25/2021 is Christmas'
         );
 
-        var HOLIDAY = 'New Years';
+        var HOLIDAY = "New Year's Day";
 
         assert.equal(
             h._.getDate(new Date('1/1/2021')),
             HOLIDAY,
-            '1/1/2021 is New Years'
+            "1/1/2021 is New Year's Day"
         );
 
     });
@@ -151,7 +151,7 @@ module('isHoliday', function () {
 
         assert.true(
             h.isHoliday(new Date('1/1/2020')),
-            '1/1/2020 New Years'
+            "1/1/2020 New Year's Day"
         );
 
         assert.true(

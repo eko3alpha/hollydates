@@ -1,4 +1,4 @@
-## HollyDate
+## HollyDates
 
 Javascript library used when you want to execute a certain function on any of the registered dates.
 

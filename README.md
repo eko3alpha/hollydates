@@ -54,13 +54,34 @@ You can also check for weekends ( Saturday or Sunday)
 
 ## Preloaded Federal Holidays
 
--   New Year’s Day :: January 1st
--   Martin Luther King Day :: 3rd Monday of January
--   Washington’s Birthday :: February 17th
--   Memorial Day :: Last Monday of May
--   Independence Day :: July 4th
--   Labor Day :: 1st Monday of September
--   Columbus Day :: 2nd Monday of October
--   Veterans Day :: November 11th
--   Thanksgiving Day :: Last Thursday of November
--   Christmas Day :: December 25th
+These holidays are the defaults.  No need to load them unless you reset.
+
+New Year’s Day :: January 1st
+    h.addByDate('Christmas', h.JAN, 1);
+
+Martin Luther King Day :: 3rd Monday of January
+    h.addByOccurance('Memorial Day', h.THIRD, h.MON, h.JAN);
+
+Washington’s Birthday :: February 17th
+    h.addByDate('Christmas', h.FEB, 17);
+
+Memorial Day :: Last Monday of May
+    h.addByOccurance('Memorial Day', h.LAST, h.MON, h.MAY);
+
+Independence Day :: July 4th
+    h.addByDate('Christmas', h.JUL, 4);
+
+Labor Day :: 1st Monday of September
+    h.addByOccurance('Memorial Day', h.FIRST, h.MON, h.SEP);
+
+Columbus Day :: 2nd Monday of October
+    h.addByOccurance('Memorial Day', h.SECOND, h.MON, h.OCT);
+
+Veterans Day :: November 11th
+    h.addByDate('Christmas', h.NOV, 11);
+
+Thanksgiving Day :: Last Thursday of November
+    h.addByOccurance('Memorial Day', h.LAST, h.THU, h.NOV);
+
+Christmas Day :: December 25th
+    h.addByDate('Christmas', h.DEC, 25);

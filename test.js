@@ -216,8 +216,6 @@ module('reset', function () {
     test('reset', function (assert) {
 
         var h = HollyDates();
-
-        h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN);
         h.reset();
 
         assert.deepEqual(
@@ -259,5 +257,34 @@ module('isWeekend', function () {
             h.isWeekend(new Date('9/7/2020')),
             '9/6/2020 falls on a monday'
         );
+    });
+});
+
+module('getCallBacks', function () {
+    test('add callbacks', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        var testMe;
+
+        h.addByOccurance('Last Day of School', h.LAST, h.FRI, h.JUN)
+            .onMatch(function(holiday)
+            {
+                testMe = 'fired';
+            });
+
+        assert.equal(
+            typeof h._.getCallBacks()['Last Day of School'],
+            'function',
+            'callback should be a function'
+        );
+
+        assert.equal(
+            typeof h._.getCallBacks()['no callback registered'],
+            'undefined',
+            'no callback for holiday should return undefined'
+        );
+
     });
 });

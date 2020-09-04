@@ -44,7 +44,6 @@
             "Memorial Day": [LAST, MON, MAY],
             "Labor Day": [FIRST, MON, SEP],
             "Columbus Day": [SECOND, MON, OCT],
-            "Daylight Savings Time Ends": [FIRST, SUN, NOV],
             "Thanksgiving Day": [LAST, THU, NOV]
         }
 

@@ -102,3 +102,161 @@ Thanksgiving Day :: Last Thursday of November
 Christmas Day :: December 25th
 
     h.addByDate('Christmas', h.DEC, 25);
+
+## Register Custom Holidays
+
+In order to make registering dates easier there are some properties available to you.  These values store numerical values starting at 1.  Generally Date() values start at 0 index.  However when we think of dates we don't think 0 for January, we think 1.  Same applies to weekdays, we dont say Sunday is the 0 day of the week.
+
+**Occurrences**
+- h.FIRST
+- h.SECOND
+- h.THIRD
+- h.FOURTH
+- h.LAST
+
+**Weekdays**
+- h.SUN
+- h.MON
+- h.TUE
+- h.WED
+- h.THU
+- h.FRI
+- h.SAT
+
+**Months**
+- h.JAN
+- h.FEB
+- h.MAR
+- h.APR
+- h.MAY
+- h.JUN
+- h.JUL
+- h.AUG
+- h.SEP
+- h.OCT
+- h.NOV
+- h.DEC
+
+Some holidays like MLK, Labor Day and Thanksgiving fall on floating holidays that are different every year.  You use this to register them
+
+ **addByOccurrence( name, occurrence, weekDay, month )**
+
+- **name**: name of holiday or custom date
+- **occurrence**: what week in the month the holiday occurs,  1 for 1st, 2 for 2nd... -1 for last week
+- **weekDay**: day of week, 1 for Sunday, 2 for Monday...
+- **month**: month number 1 for January, 2 for Feb...
+
+
+
+    // using helpers
+    h.addByOccurrence('My Fav Holiday', h.LAST, h.FRI, h.JUN);
+
+    // using numbers
+    h.addByOccurrence('My Fav Holiday', -1, 6, 6);
+
+
+ Some holidays like New Years and Christmas fall on the same date every year, thats when you would use this to register them
+
+ **addByDate( name, month, date )**
+
+- **name**: name of holiday or custom date
+- **month**: month number 1 for January, 2 for Feb...
+- **date**: numeric date, 1 ~ 31
+
+
+
+    // using helpers
+    h.addByDate('My Fav Holiday', h.NOV, 5);
+
+    // using numbers
+    h.addByDate('My Fav Holiday', 11, 5);
+
+
+## Checking For Holidays
+
+**HollyDates( ) :: object**
+
+Returns a fresh HollyDates object
+
+    var h = HollyDates();
+
+  **reset( )**
+
+Clears all registered holidays and custom dates
+
+    h.reset();
+
+**isWeekend( ... ) :: true | false**
+
+- optional Date object
+
+if no value passed it will check to see if today is a weekend
+
+    h.isWeekend();
+
+Pass in a date object to check if it's a weekend
+
+    h.isWeekend(new Date('1/1/2000));
+
+**isHoliday( ... ) :: true | false**
+
+- optional Date object
+
+if no value passed it will check to see if today is a holiday
+
+    h.isHoliday();
+
+Pass in a date object to check if it's a holiday, in this case this will return true as 9/7/2020 is Labor Day
+
+    h.isHoliday(new Date('9/7/2020)); // returns true;
+
+ **getHoliday( ... ) :: null | string**
+
+- optional Date object
+
+if no value passed it will check today to see if it's a registered holiday or custom date
+
+    h.getHoliday();
+
+Pass in a date object to check if it's a holiday
+
+    h.getHoliday(new Date('9/7/2020)); // returns "Labor Day"
+
+## Callbacks
+
+You can register a callback to execute if you have provided one.  Two parameters will be passed to you for the callback, first is the matching holiday text, the second is the date object that matched.
+
+ **onMatch( ... )**
+
+- optional callback
+
+Pass a callback during registration
+
+    h.addByOccurrence('My Fav Holiday', h.LAST, h.FRI, h.JUN)
+    .onMatch(function(holiday, date) {
+
+        // do something here
+
+    });
+
+    h.addByDate('My Fav Holiday', h.NOV, 5)
+    .onMatch(function(holiday, date) {
+
+        // do something here
+
+    });
+
+
+**trigger( ... ) :: true | false**
+
+- optional Date object
+
+To trigger a callback you can pass in a date to check or by default it will check if today is a holiday and trigger any registered callbacks
+
+Check to see if today is a holiday, if so check for any callbacks and execute
+
+    h.trigger()
+
+Check to see if today is the provided date is a holiday, if so check for any callbacks and execute
+
+    h.trigger(new Date('11/5/2020'))

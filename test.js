@@ -462,3 +462,34 @@ module('onMatch', function () {
 
     });
 });
+
+
+module('default todays date if no date is passed', function () {
+
+    test('getHoliday', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        h.addByDate('today', new Date().getMonth() + 1, new Date().getDate())
+        .onMatch(function (holiday, date) {
+            // do something
+        });
+
+        assert.true(
+            h.isHoliday(),
+            'today is holiday'
+        );
+
+        assert.equal(
+            h.getHoliday(),
+            'today',
+            'should return "today"'
+        );
+
+        assert.true(
+            h.trigger(),
+            'call back should have fired for today'
+        );
+    });
+});

@@ -66,6 +66,11 @@
 
         var trigger = function(date)
         {
+            if(typeof date == 'undefined')
+            {
+                date = new Date();
+            }
+
             var holiday;
 
             if((holiday = getRegisteredOccurrence(date)) != null)
@@ -186,6 +191,11 @@
 
         var isWeekend = function(date)
         {
+            if(typeof date == 'undefined')
+            {
+                date = new Date();
+            }
+
             if(date.getDay() == SAT -1)
             {
                 return true;
@@ -201,6 +211,11 @@
 
         var isHoliday = function(date) {
 
+            if(typeof date == 'undefined')
+            {
+                date = new Date();
+            }
+
             if (getRegisteredOccurrence(date)) {
                 return true;
             }
@@ -214,6 +229,11 @@
 
         var getHoliday = function(date)
         {
+            if(typeof date == 'undefined')
+            {
+                date = new Date();
+            }
+
             var holiday;
             if (( holiday = getRegisteredOccurrence(date)) != null) {
                 return holiday;

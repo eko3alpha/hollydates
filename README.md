@@ -32,32 +32,32 @@ Add custom holidays that fall on the same date every year
 ```
 Check to see what holiday (occurrence or custom date) falls on a given date
 ```javascript
-    h.getHoliday(new Date('1/1/2020'));
     // returns "New Years"
+    h.getHoliday(new Date('1/1/2020'));
 
-    h.getHoliday(new Date('9/7/2020'));
     // returns "Labor Day"
+    h.getHoliday(new Date('9/7/2020'));
 
-    h.getHoliday(new Date('8/16/2020'));
     // returns "My Super Soft Birthday Party!"
+    h.getHoliday(new Date('8/16/2020'));
 ```
 If no holidays are found it will return null
 ```javascript
-    h.getHoliday(new Date('6/1/2020'));
     // returns null if no holidays are found
+    h.getHoliday(new Date('6/1/2020'));
 ```
 If you only need to check if there is a holiday
 ```javascript
-    h.isHoliday(new Date('6/1/2020'));
     // returns true or false
+    h.isHoliday(new Date('6/1/2020'));
 ```
 You can also check for weekends ( Saturday or Sunday)
 ```javascript
-    h.isWeekend(new Date('9/1/2020'));
     // returns false
+    h.isWeekend(new Date('9/1/2020'));
 
-    h.isWeekend(new Date('9/5/2020'));
     // returns true
+    h.isWeekend(new Date('9/5/2020'));
 ```
 ## Preloaded Federal Holidays
 

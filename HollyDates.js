@@ -145,6 +145,21 @@
             return null;
         }
 
+        var isWeekend = function(date)
+        {
+            if(date.getDay() == SAT -1)
+            {
+                return true;
+            }
+
+            if(date.getDay() == SUN -1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         var isHoliday = function(date) {
 
             if (getHoliday(date)) {
@@ -170,6 +185,7 @@
 
         return {
             'isHoliday': isHoliday,
+            'isWeekend': isWeekend,
             'addByOccurance': addByOccurance,
             'addByDate': addByDate,
             'getHoliday': getHoliday,

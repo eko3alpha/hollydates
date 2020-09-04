@@ -66,20 +66,30 @@
 
         var trigger = function(date)
         {
-            if(isHoliday(date))
+            var holiday;
+
+            if((holiday = getRegisteredOccurrence(date)) != null)
             {
-                return;
+                return runCallback(holiday, date);
             }
 
-            if(isDate(date))
+            if((holiday = getRegisteredDate(date)) != null)
             {
-                return;
+                return runCallback(holiday, date);
             }
 
+            return false;
+        }
+
+        var runCallback = function(holiday, date)
+        {
             if(typeof CALLBACKS[holiday] == 'function')
             {
-                CALLBACKS[holiday](holiday);
+                CALLBACKS[holiday](holiday, date);
+                return true;
             }
+
+            return false;
         }
 
         var addByOccurrence = function(holiday, occurrence, weekDay, month)

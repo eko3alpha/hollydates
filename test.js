@@ -219,14 +219,12 @@ module('reset', function () {
         h.reset();
 
         assert.deepEqual(
-            h._.getRegisteredOccurrences(),
-            {},
+            h._.getRegisteredOccurrences(), {},
             'reset should clear all holidays'
         );
 
         assert.deepEqual(
-            h._.getCustomDates(),
-            {},
+            h._.getCustomDates(), {},
             'reset should clear all custom dates'
         );
     });
@@ -267,8 +265,7 @@ module('getCallBacks', function () {
         h.reset();
 
         h.addByOccurrence('Last Day of School', h.LAST, h.FRI, h.JUN)
-            .onMatch(function(holiday)
-            {});
+            .onMatch(function (holiday) {});
 
         assert.equal(
             typeof h._.getCallBacks()['Last Day of School'],
@@ -331,30 +328,137 @@ module('getHoliday', function () {
 
 
 
+module('onMatch', function () {
 
 
+    test('test trigger() return value', function (assert) {
 
-// module('onMatch', function () {
-//     test('test callback execution', function (assert) {
+        var h = HollyDates();
+        h.reset();
 
-//         var h = HollyDates();
-//         h.reset();
+        var test;
 
-//         var test;
+        h.addByOccurrence('My Fav Holiday', h.LAST, h.FRI, h.JUN)
+            .onMatch(function (holiday) {
+                test = 'Occurrence';
+            });
 
-//         h.addByOccurrence('My Holiday', h.LAST, h.FRI, h.JUN)
-//             .onMatch(function(holiday)
-//             {
-//                 test = holiday;
-//             });
+        assert.equal(
+            h.trigger(new Date('6/26/2020')),
+            true,
+            'registered occurrence should be triggered and return true'
+        );
 
-//         h.trigger(new Date('6/26/2020'));
+        h.addByDate('My 2nd Fav Holiday', h.JUL, 4)
+            .onMatch(function (holiday) {
+                test = 'Date';
+            });
 
-//         assert.equal(
-//             test,
-//             'My Holiday',
-//             'callback should fire'
-//         );
+        assert.equal(
+            h.trigger(new Date('7/4/2020')),
+            true,
+            'registered date should be triggered and return true'
+        );
 
-//     });
-// });
+        assert.equal(
+            h.trigger(new Date('1/1/2020')),
+            false,
+            'should return false, no registered holidays available'
+        );
+    });
+
+
+    test('test callback execution', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        var test;
+
+        h.addByOccurrence('My Fav Holiday', h.LAST, h.FRI, h.JUN)
+            .onMatch(function (holiday) {
+                test = 'Occurrence';
+            });
+
+        h.trigger(new Date('6/26/2020'));
+
+        assert.equal(
+            test,
+            'Occurrence',
+            'registered occurrence should be triggered'
+        );
+
+        h.addByDate('My 2nd Fav Holiday', h.JUL, 4)
+            .onMatch(function (holiday) {
+                test = 'Date';
+            });
+
+        h.trigger(new Date('7/4/2020'));
+
+        assert.equal(
+            test,
+            'Date',
+            'registered date should be triggered'
+        );
+
+    });
+
+    test('test callback parameters for custom occurrences', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        var testHoliday;
+        var testDate;
+
+        h.addByOccurrence('My Fav Holiday', h.LAST, h.FRI, h.JUN)
+            .onMatch(function (holiday, date) {
+                testHoliday = holiday;
+                testDate = date;
+            });
+
+        h.trigger(new Date('6/26/2020'));
+
+        assert.equal(
+            testHoliday,
+            'My Fav Holiday',
+            'occurrence holiday parameter passed'
+        );
+
+        assert.deepEqual(
+            testDate,
+            new Date('6/26/2020'),
+            'occurrence date parameter passed'
+        );
+    });
+
+    test('test callback parameters for custom dates', function (assert) {
+
+        var h = HollyDates();
+        h.reset();
+
+        var testHoliday;
+        var testDate;
+
+        h.addByDate('My 2nd Fav Holiday', h.JUL, 4)
+            .onMatch(function (holiday, date) {
+                testHoliday = holiday;
+                testDate = date;
+            });
+
+        h.trigger(new Date('7/4/2020'));
+
+        assert.equal(
+            testHoliday,
+            'My 2nd Fav Holiday',
+            'custom date holiday parameter passed'
+        );
+
+        assert.deepEqual(
+            testDate,
+            new Date('7/4/2020'),
+            'custom date date parameter passed'
+        );
+
+    });
+});

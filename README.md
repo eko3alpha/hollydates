@@ -1,6 +1,13 @@
-## HollyDates
+## HollyDate
 
-Javascript library to see if a given date falls on a holiday or matches custom dates.  Useful for when you want to show/hide elements in the DOM based on holiday messaging.
+Javascript library used when you want to execute a certain function on any of the registered dates.
+
+## Use Cases
+
+- You want to hide "Call us now at 555-5555" when you know your closed on weekends and holidays
+- If you want to change background images to holiday themes on your website
+- Redirect your site to another support site if call center is closed for the day
+- Display special messages on your site on special occasions
 
 ## Usage
 

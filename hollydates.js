@@ -47,22 +47,41 @@
             "Thanksgiving Day": [LAST, THU, NOV]
         }
 
+        var CALLBACKS = {}
+
         var reset = function()
         {
             CUSTOM_DATES = {};
             HOLIDAYS = {};
+            CALLBACKS = {};
+        }
+
+        var onMatch = function(holiday)
+        {
+            return function(callBack)
+            {
+                CALLBACKS[holiday] = callBack;
+            }
+        }
+
+        var runCallBack = function(holiday)
+        {
+            if(typeof CALLBACKS[holiday] == 'function')
+            {
+                CALLBACKS[holiday](holiday);
+            }
         }
 
         var addByOccurance = function(holiday, occurance, weekDay, month)
         {
             HOLIDAYS[holiday] = [occurance, weekDay, month];
-            return HOLIDAYS;
+            return {'onMatch' : onMatch(holiday)};
         }
 
         var addByDate = function(customDate, month, date)
         {
             CUSTOM_DATES[customDate] = [month, date];
-            return CUSTOM_DATES;
+            return {'onMatch' : onMatch(customDate)};
         }
 
         var getMonthAWeekFromDate = function(date) {
@@ -183,6 +202,11 @@
             return CUSTOM_DATES;
         }
 
+        var getCallBacks = function()
+        {
+            return CALLBACKS;
+        }
+
         return {
             'isHoliday': isHoliday,
             'isWeekend': isWeekend,
@@ -221,10 +245,12 @@
             '_': {
                 'getHolidays': getHolidays,
                 'getCustomDates': getCustomDates,
+                'getCallBacks': getCallBacks,
                 'getDate': getDate,
                 'isDay': isDay,
                 'isDate': isDate,
-                'getMonthAWeekFromDate': getMonthAWeekFromDate
+                'getMonthAWeekFromDate': getMonthAWeekFromDate,
+                'runCallBack': runCallBack
             }
         }
     }

@@ -44,6 +44,14 @@ If you only need to check if there is a holiday
     h.isHoliday(new Date('6/1/2020'));
     // returns true or false
 
+You can also check for weekends ( Saturday or Sunday)
+
+    h.isWeekend(new Date('9/1/2020'));
+    // returns false
+
+    h.isWeekend(new Date('9/5/2020'));
+    // returns true
+
 ## Preloaded Federal Holidays
 
 -   New Year’s Day :: January 1st

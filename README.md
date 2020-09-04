@@ -145,8 +145,7 @@ Some holidays like MLK, Labor Day and Thanksgiving fall on floating holidays tha
 - **occurrence**: what week in the month the holiday occurs,  1 for 1st, 2 for 2nd... -1 for last week
 - **weekDay**: day of week, 1 for Sunday, 2 for Monday...
 - **month**: month number 1 for January, 2 for Feb...
-
-
+<!-- end of the list -->
 
     // using helpers
     h.addByOccurrence('My Fav Holiday', h.LAST, h.FRI, h.JUN);
@@ -162,8 +161,7 @@ Some holidays like MLK, Labor Day and Thanksgiving fall on floating holidays tha
 - **name**: name of holiday or custom date
 - **month**: month number 1 for January, 2 for Feb...
 - **date**: numeric date, 1 ~ 31
-
-
+<!-- end of the list -->
 
     // using helpers
     h.addByDate('My Fav Holiday', h.NOV, 5);

@@ -137,7 +137,7 @@ In order to make registering dates easier there are some properties available to
 - h.NOV
 - h.DEC
 
-Some holidays like MLK, Labor Day and Thanksgiving fall on floating holidays that are different every year.  You use this to register them
+Some holidays like MLK, Labor Day and Thanksgiving fall on floating holidays that are different every year.  You use ```addByOccurrence``` to register them
 
  **addByOccurrence( name, occurrence, weekDay, month )**
 
@@ -155,7 +155,7 @@ Some holidays like MLK, Labor Day and Thanksgiving fall on floating holidays tha
     h.addByOccurrence('My Fav Holiday', -1, 6, 6);
 ```
 
- Some holidays like New Years and Christmas fall on the same date every year, thats when you would use this to register them
+ Some holidays like New Years and Christmas fall on the same date every year, thats when you would use ```addByDate``` to register them
 
  **addByDate( name, month, date )**
 
